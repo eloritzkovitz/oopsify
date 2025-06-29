@@ -5,38 +5,116 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.oopsify-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;  
+  font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.oopsify-header {
+  text-align: center;
+  padding: 2rem 1rem 1rem 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.oopsify-header h1 {
+  font-size: 3rem;
+  color: #6366f1;
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
 }
 
-.card {
-  padding: 2em;
+.oopsify-header p {
+  color: #334155;
+  font-size: 1.2rem;
 }
 
-.read-the-docs {
-  color: #888;
+.error-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.error-btn {
+  background: #fff;
+  border: 2px solid #6366f1;
+  border-radius: 1rem;
+  padding: 1.5rem 2rem;
+  min-width: 180px;
+  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+  cursor: pointer;
+  transition: transform 0.1s, box-shadow 0.1s, background 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.error-btn:hover, .error-btn:focus {
+  background: #6366f1;
+  color: #fff;
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.18);
+}
+
+.error-btn .error-code {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.error-btn .error-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.error-page {
+  margin: auto;
+  text-align: center;
+  padding: 3rem 1rem;
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(99, 102, 241, 0.12);
+  max-width: 400px;
+}
+
+.error-page .error-code {
+  font-size: 5rem;
+  color: #ef4444;
+  margin-bottom: 0.5rem;
+}
+
+.error-page .error-title {
+  font-size: 2rem;
+  color: #334155;
+  margin-bottom: 1rem;
+}
+
+.error-page .error-description {
+  color: #64748b;
+  margin-bottom: 2rem;
+}
+
+.back-btn {
+  background: #6366f1;
+  color: #fff;
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.7rem 2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.back-btn:hover, .back-btn:focus {
+  background: #4338ca;
+}
+
+.oopsify-footer {
+  text-align: center;
+  margin-top: auto;
+  padding: 1.5rem 0 0.5rem 0;
+  color: #64748b;
+  font-size: 0.95rem;
 }
