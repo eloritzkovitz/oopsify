@@ -29,46 +29,66 @@
   font-size: 1.2rem;
 }
 
-.error-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.5rem;
+/* --- Modern Error Card Grid --- */
+.error-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
   margin: 2rem 0;
+  padding: 0 1rem;
 }
 
-.error-btn {
+.error-card {
   background: #fff;
   border: 2px solid #6366f1;
-  border-radius: 1rem;
-  padding: 1.5rem 2rem;
-  min-width: 180px;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.08);
+  border-radius: 1.2rem;
+  padding: 1.5rem 1.2rem;
+  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.08);
   cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.1s, background 0.2s;
+  transition: transform 0.12s, box-shadow 0.12s, border 0.2s;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
-.error-btn:hover, .error-btn:focus {
+.error-card:hover, .error-card:focus {
   background: #6366f1;
   color: #fff;
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 4px 16px rgba(99, 102, 241, 0.18);
+  border-color: #4338ca;
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.18);
 }
 
-.error-btn .error-code {
-  font-size: 2.2rem;
+.error-card-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+
+.error-card .error-code {
+  font-size: 2rem;
   font-weight: bold;
-  margin-bottom: 0.3rem;
 }
 
-.error-btn .error-title {
+.error-card .error-title {
   font-size: 1.1rem;
   font-weight: 500;
 }
 
+.error-card-desc {
+  font-size: 0.98rem;
+  color: #64748b;
+  margin-top: 0.3rem;
+}
+
+.error-card:hover .error-card-desc,
+.error-card:focus .error-card-desc {
+  color: #e0e7ff;
+}
+
+/* --- Error Page Styles --- */
 .error-page {
   margin: auto;
   text-align: center;
