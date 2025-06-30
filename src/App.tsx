@@ -30,7 +30,19 @@ function App() {
       {!selectedError ? (
         <>
           <header className="oopsify-header">
-            <h1>Oopsify</h1>
+            <h1>
+              <img
+                src="/oopsify.svg"
+                alt="Oopsify Logo"
+                className="oopsify-logo"
+                style={{
+                  height: "2em",
+                  verticalAlign: "middle",
+                  marginRight: "0.5em",
+                }}
+              />
+              Oopsify
+            </h1>
             <p>
               Simulate and learn about HTTP error messages.
               <br />
@@ -49,7 +61,7 @@ function App() {
                   <div className="error-card-header">
                     <span className="error-code">{error.code}</span>
                     <span className="error-title">{error.title}</span>
-                  </div>                  
+                  </div>
                 </button>
               ))}
             </div>
