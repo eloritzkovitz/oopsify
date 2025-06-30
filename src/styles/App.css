@@ -43,6 +43,38 @@
   font-size: 0.95rem;
 }
 
+/* --- Search Bar Styles --- */
+
+.search-bar-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 340px;
+  margin: 1.5rem auto 0 auto;
+}
+
+.search-icon {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+}
+
+.error-search {
+  width: 100%;
+  padding: 0.7rem 1.2rem 0.7rem 2.5rem;
+  border-radius: 0.7rem;
+  border: 1.5px solid #6366f1;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
 /* --- Error Card Grid --- */
 .error-grid {
   display: grid;

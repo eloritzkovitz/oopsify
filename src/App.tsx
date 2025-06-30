@@ -38,23 +38,28 @@ function App() {
               <br />
               Click any error code below to see a simulated error page!
             </p>
-            <input
-              type="text"
-              className="error-search"
-              placeholder="Search error code or title..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              style={{
-                marginTop: "1.5rem",
-                padding: "0.7rem 1.2rem",
-                borderRadius: "0.7rem",
-                border: "1.5px solid #6366f1",
-                fontSize: "1rem",
-                width: "100%",
-                maxWidth: "340px",
-                outline: "none",
-              }}
-            />
+            <div className="search-bar-wrapper">
+              <span className="search-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  fill="none"
+                  stroke="#6366f1"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <circle cx="11" cy="11" r="7" />
+                  <line x1="16.5" y1="16.5" x2="21" y2="21" />
+                </svg>
+              </span>
+              <input
+                type="text"
+                className="error-search"
+                placeholder="Search error code or title..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </div>
           </header>
           <main>
             <div className="error-grid">
@@ -73,7 +78,13 @@ function App() {
                   </button>
                 ))
               ) : (
-                <div style={{ gridColumn: "1/-1", textAlign: "center", color: "#64748b" }}>
+                <div
+                  style={{
+                    gridColumn: "1/-1",
+                    textAlign: "center",
+                    color: "#64748b",
+                  }}
+                >
                   No errors found.
                 </div>
               )}
