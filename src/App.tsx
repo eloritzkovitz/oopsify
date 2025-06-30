@@ -36,7 +36,7 @@ function App() {
                 alt="Oopsify Logo"
                 className="oopsify-logo"
                 style={{
-                  height: "2em",
+                  height: "2.2em",
                   verticalAlign: "middle",
                   marginRight: "0.5em",
                 }}

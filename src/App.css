@@ -29,6 +29,12 @@
   font-size: 1.2rem;
 }
 
+.oopsify-logo {
+  height: 2.2em;
+  vertical-align: middle;
+  margin-right: 0.5em;
+}
+
 /* --- Modern Error Card Grid --- */
 .error-grid {
   display: grid;
