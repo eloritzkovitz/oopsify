@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { CategoryFilter } from "./components/CategoryFilter";
 import { ErrorPage } from "./components/ErrorPage";
 import { errors } from "./data/errors";
 import type { ErrorInfo } from "./data/errors";
@@ -7,12 +8,16 @@ import "./styles/App.css";
 function App() {
   const [selectedError, setSelectedError] = useState<ErrorInfo | null>(null);
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState<
+    "All" | "Client Error" | "Server Error" | "Other"
+  >("All");
 
-  // Filter errors by code or title
+  // Filter errors by category and by code or title
   const filteredErrors = errors.filter(
     (error) =>
-      error.code.toString().includes(search.trim()) ||
-      error.title.toLowerCase().includes(search.trim().toLowerCase())
+      (category === "All" || error.category === category) &&
+      (error.code.toString().includes(search.trim()) ||
+        error.title.toLowerCase().includes(search.trim().toLowerCase()))
   );
 
   return (
@@ -60,6 +65,7 @@ function App() {
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
+            <CategoryFilter category={category} setCategory={setCategory} />
           </header>
           <main>
             <div className="error-grid">

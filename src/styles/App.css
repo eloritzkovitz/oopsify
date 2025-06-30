@@ -56,7 +56,7 @@
 
 .search-icon {
   position: absolute;
-  left: 16px;
+  left: 16px;  
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
@@ -76,6 +76,7 @@
 }
 
 /* --- Error Card Grid --- */
+
 .error-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -100,8 +101,7 @@
 
 .error-card:hover, .error-card:focus {
   background: #6366f1;
-  color: #fff;
-  border-color: #4338ca;
+  color: #fff;  
   transform: translateY(-6px) scale(1.03);
   box-shadow: 0 6px 24px rgba(99, 102, 241, 0.18);
 }
@@ -116,11 +116,13 @@
 .error-card .error-code {
   font-size: 2rem;
   font-weight: bold;
+  color: #1e40af;
 }
 
 .error-card .error-title {
   font-size: 1.1rem;
   font-weight: 500;
+  color: #1e40af;
 }
 
 .error-card-desc {
@@ -129,9 +131,11 @@
   margin-top: 0.3rem;
 }
 
-.error-card:hover .error-card-desc,
-.error-card:focus .error-card-desc {
-  color: #e0e7ff;
+.error-card:hover .error-code,
+.error-card:focus .error-code,
+.error-card:hover .error-title,
+.error-card:focus .error-title {
+  color: #fff;
 }
 
 /* --- Header fade-in and slide-down --- */
