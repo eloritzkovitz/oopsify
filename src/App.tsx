@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CategoryFilter } from "./components/CategoryFilter";
-import { ErrorCard } from "./components/ErrorCard";
+import { ErrorGrid } from "./components/ErrorGrid";
 import { ErrorPage } from "./components/ErrorPage";
 import { SearchBar } from "./components/SearchBar";
 import { errors } from "./data/errors";
@@ -49,23 +49,7 @@ function App() {
             <CategoryFilter category={category} setCategory={setCategory} />
           </header>
           <main>
-            <div className="error-grid">
-              {filteredErrors.length > 0 ? (
-                filteredErrors.map((error) => (
-                  <ErrorCard key={error.code} error={error} onClick={() => setSelectedError(error)} />
-                ))
-              ) : (
-                <div
-                  style={{
-                    gridColumn: "1/-1",
-                    textAlign: "center",
-                    color: "#64748b",
-                  }}
-                >
-                  No errors found.
-                </div>
-              )}
-            </div>
+            <ErrorGrid errors={filteredErrors} onSelect={setSelectedError} />
           </main>
           <footer className="oopsify-footer">
             <small>
