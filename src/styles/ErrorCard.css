@@ -1,0 +1,52 @@
+.error-card {
+  background: #fff;
+  border: 2px solid #6366f1;
+  border-radius: 1.2rem;
+  padding: 1.5rem 1.2rem;
+  box-shadow: 0 2px 12px rgba(99, 102, 241, 0.08);
+  cursor: pointer;
+  transition: transform 0.12s, box-shadow 0.12s, border 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.error-card:hover, .error-card:focus {
+  background: #6366f1;
+  color: #fff;  
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 6px 24px rgba(99, 102, 241, 0.18);
+}
+
+.error-card-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+
+.error-card .error-code {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1e40af;
+}
+
+.error-card .error-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #1e40af;
+}
+
+.error-card-desc {
+  font-size: 0.98rem;
+  color: #64748b;
+  margin-top: 0.3rem;
+}
+
+.error-card:hover .error-code,
+.error-card:focus .error-code,
+.error-card:hover .error-title,
+.error-card:focus .error-title {
+  color: #fff;
+}

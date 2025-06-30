@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { CategoryFilter } from "./components/CategoryFilter";
+import { ErrorCard } from "./components/ErrorCard";
 import { ErrorPage } from "./components/ErrorPage";
+import { SearchBar } from "./components/SearchBar";
 import { errors } from "./data/errors";
 import type { ErrorInfo } from "./data/errors";
 import "./styles/App.css";
@@ -43,45 +45,14 @@ function App() {
               <br />
               Click any error code below to see a simulated error page!
             </p>
-            <div className="search-bar-wrapper">
-              <span className="search-icon">
-                <svg
-                  width="20"
-                  height="20"
-                  fill="none"
-                  stroke="#6366f1"
-                  strokeWidth="2"
-                  viewBox="0 0 24 24"
-                >
-                  <circle cx="11" cy="11" r="7" />
-                  <line x1="16.5" y1="16.5" x2="21" y2="21" />
-                </svg>
-              </span>
-              <input
-                type="text"
-                className="error-search"
-                placeholder="Search error code or title..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </div>
+            <SearchBar value={search} onChange={setSearch} />
             <CategoryFilter category={category} setCategory={setCategory} />
           </header>
           <main>
             <div className="error-grid">
               {filteredErrors.length > 0 ? (
                 filteredErrors.map((error) => (
-                  <button
-                    key={error.code}
-                    className="error-card"
-                    onClick={() => setSelectedError(error)}
-                    aria-label={`Simulate ${error.code} ${error.title}`}
-                  >
-                    <div className="error-card-header">
-                      <span className="error-code">{error.code}</span>
-                      <span className="error-title">{error.title}</span>
-                    </div>
-                  </button>
+                  <ErrorCard key={error.code} error={error} onClick={() => setSelectedError(error)} />
                 ))
               ) : (
                 <div
