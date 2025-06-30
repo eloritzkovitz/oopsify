@@ -20,7 +20,7 @@ function App() {
       {!selectedError ? (
         <>
           <header className="oopsify-header">
-            <h1>
+            <h1 className="header-animate">
               <img
                 src="/oopsify.svg"
                 alt="Oopsify Logo"
