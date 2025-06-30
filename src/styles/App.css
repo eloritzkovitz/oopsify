@@ -35,7 +35,15 @@
   margin-right: 0.5em;
 }
 
-/* --- Modern Error Card Grid --- */
+.oopsify-footer {
+  text-align: center;
+  margin-top: auto;
+  padding: 1.5rem 0 0.5rem 0;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+/* --- Error Card Grid --- */
 .error-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -92,55 +100,4 @@
 .error-card:hover .error-card-desc,
 .error-card:focus .error-card-desc {
   color: #e0e7ff;
-}
-
-/* --- Error Page Styles --- */
-.error-page {
-  margin: auto;
-  text-align: center;
-  padding: 3rem 1rem;
-  background: #fff;
-  border-radius: 1.5rem;
-  box-shadow: 0 4px 24px rgba(99, 102, 241, 0.12);
-  max-width: 400px;
-}
-
-.error-page .error-code {
-  font-size: 5rem;
-  color: #ef4444;
-  margin-bottom: 0.5rem;
-}
-
-.error-page .error-title {
-  font-size: 2rem;
-  color: #334155;
-  margin-bottom: 1rem;
-}
-
-.error-page .error-description {
-  color: #64748b;
-  margin-bottom: 2rem;
-}
-
-.back-btn {
-  background: #6366f1;
-  color: #fff;
-  border: none;
-  border-radius: 0.7rem;
-  padding: 0.7rem 2rem;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.back-btn:hover, .back-btn:focus {
-  background: #4338ca;
-}
-
-.oopsify-footer {
-  text-align: center;
-  margin-top: auto;
-  padding: 1.5rem 0 0.5rem 0;
-  color: #64748b;
-  font-size: 0.95rem;
 }

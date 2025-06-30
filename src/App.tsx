@@ -1,26 +1,8 @@
 import { useState } from "react";
-import "./App.css";
+import { ErrorPage } from "./components/ErrorPage";
 import { errors } from "./data/errors";
 import type { ErrorInfo } from "./data/errors";
-
-function ErrorPage({
-  error,
-  onBack,
-}: {
-  error: ErrorInfo;
-  onBack: () => void;
-}) {
-  return (
-    <div className="error-page">
-      <h1 className="error-code">{error.code}</h1>
-      <h2 className="error-title">{error.title}</h2>
-      <p className="error-description">{error.description}</p>
-      <button className="back-btn" onClick={onBack}>
-        Back to Home
-      </button>
-    </div>
-  );
-}
+import "./styles/App.css";
 
 function App() {
   const [selectedError, setSelectedError] = useState<ErrorInfo | null>(null);
