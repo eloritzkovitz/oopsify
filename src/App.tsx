@@ -24,6 +24,14 @@ function ErrorPage({
 
 function App() {
   const [selectedError, setSelectedError] = useState<ErrorInfo | null>(null);
+  const [search, setSearch] = useState("");
+
+  // Filter errors by code or title
+  const filteredErrors = errors.filter(
+    (error) =>
+      error.code.toString().includes(search.trim()) ||
+      error.title.toLowerCase().includes(search.trim().toLowerCase())
+  );
 
   return (
     <div className="oopsify-container">
@@ -48,22 +56,45 @@ function App() {
               <br />
               Click any error code below to see a simulated error page!
             </p>
+            <input
+              type="text"
+              className="error-search"
+              placeholder="Search error code or title..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              style={{
+                marginTop: "1.5rem",
+                padding: "0.7rem 1.2rem",
+                borderRadius: "0.7rem",
+                border: "1.5px solid #6366f1",
+                fontSize: "1rem",
+                width: "100%",
+                maxWidth: "340px",
+                outline: "none",
+              }}
+            />
           </header>
           <main>
             <div className="error-grid">
-              {errors.map((error) => (
-                <button
-                  key={error.code}
-                  className="error-card"
-                  onClick={() => setSelectedError(error)}
-                  aria-label={`Simulate ${error.code} ${error.title}`}
-                >
-                  <div className="error-card-header">
-                    <span className="error-code">{error.code}</span>
-                    <span className="error-title">{error.title}</span>
-                  </div>
-                </button>
-              ))}
+              {filteredErrors.length > 0 ? (
+                filteredErrors.map((error) => (
+                  <button
+                    key={error.code}
+                    className="error-card"
+                    onClick={() => setSelectedError(error)}
+                    aria-label={`Simulate ${error.code} ${error.title}`}
+                  >
+                    <div className="error-card-header">
+                      <span className="error-code">{error.code}</span>
+                      <span className="error-title">{error.title}</span>
+                    </div>
+                  </button>
+                ))
+              ) : (
+                <div style={{ gridColumn: "1/-1", textAlign: "center", color: "#64748b" }}>
+                  No errors found.
+                </div>
+              )}
             </div>
           </main>
           <footer className="oopsify-footer">
