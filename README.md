@@ -46,7 +46,22 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ## Testing
 
-Will be added in the future.
+Automated end-to-end tests are implemented using **Selenium**.  
+You can find the test suite in [`main_tests.py`](main_tests.py).
+
+**The suite includes the following tests:**
+
+- **Main page load (`test_main_page`):**  
+  Verifies that the main page loads successfully.
+
+- **Category filtering (`test_category_filtering`):**  
+  Checks that filtering by category (e.g., "Client Error") works and the filter button is displayed and clickable.
+
+- **Search functionality (`test_search`):**  
+  Ensures the search bar is visible and that searching for an error code (e.g., "404") works as expected.
+
+- **Show/hide example & back to home (`test_show_example`):**  
+  Clicks on a specific error card (e.g., 403), expands and collapses the example section, and tests the "Back to Home" button.
 
 ## Deployment & CI/CD
 
@@ -71,7 +86,7 @@ src/
 
 ## Authors
 
-Elor Itzkovitz  
-Yuval Ben Shitrit  
-Noa Gedo  
-Hinoy Solomon  
+[Elor Itzkovitz](https://github.com/Elor-itz)  
+[Yuval Ben Shitrit](https://github.com/yuvalbenshitrit)  
+[Noa Gedo](https://github.com/noagedo)  
+[Hinoy Solomon](https://github.com/hinoyso)  
