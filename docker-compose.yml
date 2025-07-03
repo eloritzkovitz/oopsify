@@ -1,0 +1,9 @@
+version: "3.3"
+services:
+  web:
+    container_name: oopsify
+    environment:
+      - NODE_ENV=prod
+    image: eloritz/oopsify:latest
+    ports:
+      - "80:3000"
