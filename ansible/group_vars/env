@@ -1,0 +1,15 @@
+server_name: OopsifyServer
+env: dev
+
+vpc_name: my-app-vpc
+network: 10.1.0.0/16
+subnet_public: 10.1.0.0/24
+env_name: DevOps
+zone: eu-central-1
+subnet1: eu-central-1a
+
+keypair: DevOps2025
+
+aws_abuntu_ami:
+Server_type: t2.micro
+server_volume_size: 8
