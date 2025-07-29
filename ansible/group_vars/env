@@ -10,6 +10,6 @@ subnet1: eu-central-1a
 
 keypair: DevOps2025
 
-aws_abuntu_ami:
-Server_type: t2.micro
+aws_ubuntu_ami: ami-02003f9f0fde924ea
+server_type: t2.micro
 server_volume_size: 8
