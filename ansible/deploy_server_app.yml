@@ -101,7 +101,17 @@
               - 80
               - 22
             cidr_ip: 0.0.0.0/0
+          - proto: -1
+            group_id: self
       register: sg
+
+    - name: Add security group definition to vars file
+      ansible.builtin.lineinfile:
+        path: group_vars/colman.env
+        regexp: "^sg_id: "
+        line: "sg_id: {{ sg.group_id }}"
+        state: present
+        create: True
 
     - name: Create server
       amazon.aws.ec2_instance:
@@ -110,6 +120,8 @@
         instance_type: "{{ server_type }}"
         region: "{{ zone }}"
         key_name: "{{ keypair }}"
+        security_groups:
+          - "{{ sg.group_id }}"
         volumes:
           - device_name: /dev/sda1
             ebs:
@@ -201,21 +213,27 @@
 
     - name: Clone my app repository
       git:
-        repo: git@github.com:Elor-Itz/Oopsify.git
+        repo: git@github.com:eloritzkovitz/oopsify.git
         dest: /opt/app
         version: main
         key_file: ~/.ssh/id_rsa
         accept_hostkey: yes
         force: yes
 
-    - name: Build docker image and push to DockerHub
-      shell: "{{ item }}"
+    - name: Build and tag docker image
+      shell: docker compose build && docker tag $(docker images -q | head -1) {{ docker_user }}/oopsify:latest
       args:
         chdir: /opt/app
-      loop:
-        - docker login -u {{ docker_user }} -p {{ docker_token }}
-        - docker build . --tag {{ docker_user }}/pass_gen:latest
-        - docker push {{ docker_user }}/pass_gen:latest
+
+    - name: Login to Docker Hub
+      shell: docker login -u {{ docker_user }} -p {{ docker_token }}
+      args:
+        chdir: /opt/app
+
+    - name: Push image to Docker Hub
+      shell: docker push {{ docker_user }}/oopsify:latest
+      args:
+        chdir: /opt/app
 
     - name: Start docker app
       shell: docker compose up -d
