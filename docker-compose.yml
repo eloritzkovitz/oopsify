@@ -3,6 +3,6 @@ services:
     container_name: oopsify
     environment:
       - NODE_ENV=prod
-    build: .
+    image: eloritz/oopsify:latest
     ports:
-      - "5173:5173"
+      - "80:3000"
