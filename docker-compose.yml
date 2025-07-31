@@ -5,4 +5,4 @@ services:
       - NODE_ENV=prod
     image: eloritz/oopsify:latest
     ports:
-      - "80:5173"
+      - "80:4173"
