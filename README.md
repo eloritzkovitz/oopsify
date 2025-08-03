@@ -1,7 +1,7 @@
 # Oopsify
 
-Oopsify is a simple, interactive React app for simulating and learning about common HTTP error messages.  
-This project was developed as a DevOps final project and demonstrates modern DevOps practices alongside frontend development.  
+Oopsify is a web app for exploring and simulating HTTP error codes, built to demonstrate DevOps automation and modern frontend practices.  
+It features a responsive React UI, automated testing with Selenium, containerization with Docker, orchestration with Docker Compose, infrastructure provisioning with Ansible, and CI/CD pipelines using GitHub Actions.
 Built with React, TypeScript, and Vite.
 
 ## Features
@@ -27,6 +27,7 @@ The production deployment will run on an AWS EC2 server, provisioned and configu
 
 - [Node.js](https://nodejs.org/) (v18 or newer recommended)
 - [npm](https://www.npmjs.com/) (comes with Node.js)
+- [Python](https://www.python.org/) (v3.9 or newer recommended, for running tests)
 
 ### Installation
 
@@ -49,6 +50,8 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 Automated end-to-end tests are implemented using **Selenium**.  
 You can find the test suite in [`main_tests.py`](main_tests.py).
 
+* You will need to install the requirements with `pip install -r requirements.txt`
+
 **The suite includes the following tests:**
 
 - **Main page load (`test_main_page`):**  
@@ -65,28 +68,51 @@ You can find the test suite in [`main_tests.py`](main_tests.py).
 
 ## Deployment & CI/CD
 
-Will be added in the future.
+### Continuous Integration & Delivery
+
+- **GitHub Actions** automatically build and push the Docker image to Docker Hub on every push to the `main` branch.
+- See [`.github/workflows/main.yml`](.github/workflows/main.yml) and [`.github/workflows/npm-grunt.yml`](.github/workflows/npm-grunt.yml).
+
+### Automated Deployment
+
+- On every push to the `deployment` branch, GitHub Actions runs [`.github/workflows/deployment.yml`](.github/workflows/deployment.yml):
+  - Provisions an AWS EC2 server using Ansible.
+  - Installs Docker and Docker Compose.
+  - Clones the latest app code.
+  - Builds and runs the app using Docker Compose.
+  - Uses secrets for AWS credentials and SSH keys.
+
+**To deploy:**
+- Push to the `deployment` branch to trigger full server provisioning and deployment.
+
+**To update the Docker image:**
+- Push to the `main` branch to build and publish the latest image to Docker Hub.
 
 ## Project Structure
 
 ```
 src/
   App.tsx                # Main app component
-  components/
-    CategoryFilter.tsx   # Category filter buttons
-    ErrorGrid.tsx        # Error grid display
-    ErrorCard.tsx        # Single error card
-    ErrorPage.tsx        # Error details page
-    SearchBar.tsx        # Search input    
+  components/            # Reusable UI components
   data/
     errors.ts            # Error info and list
-  styles/                # App & component styles    
-  ...
+  styles/                # App & component styles
+main_tests.py            # Selenium end-to-end test suite
+Dockerfile               # Docker build instructions
+docker-compose.yml       # Multi-container orchestration
+ansible/
+  deploy_server_app.yml  # Ansible playbook for server provisioning & deployment
+.github/
+  workflows/
+    main.yml             # CI/CD workflow for building & testing
+    npm-grunt.yml        # CI/CD workflow for Docker image build/push
+    deployment.yml       # Automated deployment workflow
+README.md                # Project documentation
 ```
 
 ## Authors
 
-[Elor Itzkovitz](https://github.com/Elor-itz)  
+[Elor Itzkovitz](https://github.com/eloritzkovitz)  
 [Yuval Ben Shitrit](https://github.com/yuvalbenshitrit)  
 [Noa Gedo](https://github.com/noagedo)  
 [Hinoy Solomon](https://github.com/hinoyso)  
