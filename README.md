@@ -29,14 +29,6 @@ The production deployment will run on an AWS EC2 server, provisioned and configu
 - [npm](https://www.npmjs.com/) (comes with Node.js)
 - [Python](https://www.python.org/) (v3.9 or newer recommended, for running tests)
 
-### Installation
-
-```bash
-git clone https://github.com/Elor-Itz/oopsify.git
-cd oopsify
-npm install
-```
-
 ### Running Locally
 
 ```bash
