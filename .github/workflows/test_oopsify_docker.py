@@ -10,7 +10,7 @@ jobs:
   	- name: Build
     	  run: docker build --tag calc .
   	- name: Run Docker
-    	  run: docker run -d --name app -p 80:3000 calc
+    	  run: docker run -d --name app -p 80:4173 oopsify
   	- name: Set up Python
     	  uses: actions/setup-python@v2
     	  with:
