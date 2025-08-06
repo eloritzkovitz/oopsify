@@ -37,3 +37,21 @@ jobs:
         run: |
           ansible-playbook ansible/deploy_server_app.yml --ssh-common-args='-o StrictHostKeyChecking=no'
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script_stop: true
+          script: |
+            sudo docker stop calc || true
+            sudo docker rm calc || true
+            sudo docker rmi <your user>/oopsify || true
+            sudo docker pull <your user>/oopsify
+            sudo docker run --name calc -d -p 80:3000 <your user>/oopsify
