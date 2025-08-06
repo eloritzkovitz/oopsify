@@ -8,7 +8,7 @@ jobs:
 	steps:
   	- uses: actions/checkout@v4
   	- name: Build
-    	  run: docker build --tag calc .
+    	  run: docker build --tag oopsify .
   	- name: Run Docker
     	  run: docker run -d --name app -p 80:4173 oopsify
   	- name: Set up Python
