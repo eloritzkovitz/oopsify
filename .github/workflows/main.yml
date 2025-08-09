@@ -36,8 +36,8 @@ jobs:
           port: ${{ secrets.PORT }}
           script_stop: true
           script: |
-            sudo docker stop calc || true
-            sudo docker rm calc || true
+            sudo docker stop oopsify || true
+            sudo docker rm oopsify || true
             sudo docker rmi ${{ secrets.DOCKER_USER }}/oopsify || true
             sudo docker pull ${{ secrets.DOCKER_USER }}/oopsify
-            sudo docker run --name calc -d -p 80:3000 ${{ secrets.DOCKER_USER }}/oopsify
+            sudo docker run --name oopsify -d -p 80:4173 ${{ secrets.DOCKER_USER }}/oopsify
