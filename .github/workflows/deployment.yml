@@ -20,6 +20,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install ansible==6.7.0 requests botocore boto boto3
 
+      - name: Install Ansible AWS collections
+        run: |
+          ansible-galaxy collection install amazon.aws
+          ansible-galaxy collection install community.aws
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
