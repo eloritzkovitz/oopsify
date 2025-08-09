@@ -20,5 +20,24 @@ jobs:
       - name: Build
         run: docker build . --tag ${{ secrets.DOCKER_USER }}/oopsify:latest
 
-      - name: push to DockerHub
+      - name: Push to DockerHub
         run: docker push ${{ secrets.DOCKER_USER }}/oopsify:latest
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy app
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.PRIVATE_KEY }}
+          port: ${{ secrets.PORT }}
+          script_stop: true
+          script: |
+            sudo docker stop oopsify || true
+            sudo docker rm oopsify || true
+            sudo docker rmi ${{ secrets.DOCKER_USER }}/oopsify || true
+            sudo docker pull ${{ secrets.DOCKER_USER }}/oopsify
+            sudo docker run --name oopsify -d -p 80:4173 ${{ secrets.DOCKER_USER }}/oopsify
