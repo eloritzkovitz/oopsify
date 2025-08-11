@@ -63,19 +63,18 @@ You can find the test suite in [`main_tests.py`](main_tests.py).
 ### Continuous Integration & Delivery
 
 - **GitHub Actions** automatically build and push the Docker image to Docker Hub on every push to the `main` branch.
-- See [`.github/workflows/main.yml`](.github/workflows/main.yml) and [`.github/workflows/npm-grunt.yml`](.github/workflows/npm-grunt.yml).
+- Automated tests are run on every push and pull request using workflows.
 
 ### Automated Deployment
 
-- On every push to the `deployment` branch, GitHub Actions runs [`.github/workflows/deployment.yml`](.github/workflows/deployment.yml):
-  - Provisions an AWS EC2 server using Ansible.
+- **Server provisioning** is handled with Ansible (`ansible/deploy_server_app.yml`), which:
+  - Provisions and configures an AWS EC2 server from scratch.
   - Installs Docker and Docker Compose.
-  - Clones the latest app code.
-  - Builds and runs the app using Docker Compose.
-  - Uses secrets for AWS credentials and SSH keys.
-
-**To deploy:**
-- Push to the `deployment` branch to trigger full server provisioning and deployment.
+  - Prepares the environment for deployment.
+- **Application deployment** is completed by the GitHub Actions workflow:
+  - On every push to the `main` branch, the workflow builds and pushes the latest Docker image to Docker Hub.
+  - The server (once provisioned) can then pull and run the latest image using Docker Compose.
+  - Secrets for AWS credentials, Docker Hub, and SSH keys are managed via GitHub repository secrets.
 
 **To update the Docker image:**
 - Push to the `main` branch to build and publish the latest image to Docker Hub.
@@ -83,23 +82,22 @@ You can find the test suite in [`main_tests.py`](main_tests.py).
 ## Project Structure
 
 ```
-src/
-  App.tsx                # Main app component
-  components/            # Reusable UI components
+src/ 
+  App.tsx                    # Main app component
+  components/                # Reusable UI components
   data/
-    errors.ts            # Error info and list
-  styles/                # App & component styles
-main_tests.py            # Selenium end-to-end test suite
-Dockerfile               # Docker build instructions
-docker-compose.yml       # Multi-container orchestration
+    errors.ts                # Error info and list
+  styles/                    # App & component styles
+main_tests.py                # Selenium end-to-end test suite
+Dockerfile                   # Docker build instructions
+docker-compose.yml           # Multi-container orchestration
 ansible/
-  deploy_server_app.yml  # Ansible playbook for server provisioning & deployment
+  deploy_server_app.yml      # Ansible playbook for server provisioning & deployment
 .github/
   workflows/
-    main.yml             # CI/CD workflow for building & testing
-    npm-grunt.yml        # CI/CD workflow for Docker image build/push
-    deployment.yml       # Automated deployment workflow
-README.md                # Project documentation
+    main.yml                 # CI/CD workflow for building & deploying   
+    test_oopsify_docker.yml  # Docker end-to-end test workflow
+README.md                    # Project documentation
 ```
 
 ## Authors
