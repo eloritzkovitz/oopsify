@@ -17,7 +17,6 @@
         state: present
         dns_hostnames: yes
         dns_support: yes
-        # הסרתי את multi_ok: no כי זה פרמטר לא תקין
         tags:
           Name: "{{ vpc_name }}"
       register: vpc
@@ -101,8 +100,6 @@
               - 80
               - 22
             cidr_ip: 0.0.0.0/0
-          - proto: -1
-            group_id: self
       register: sg
 
     - name: Add security group definition to vars file
@@ -188,12 +185,6 @@
         repo: deb https://download.docker.com/linux/ubuntu jammy stable
         state: present
         
-    - name: Add ubuntu user to docker group
-      user:
-        name: ubuntu
-        groups: docker
-        append: yes
-
     - name: Install Docker
       apt:
         name:
@@ -211,6 +202,15 @@
         state: restarted
         enabled: yes
 
+    - name: Add ubuntu user to docker group
+      user:
+        name: ubuntu
+        groups: docker
+        append: yes
+
+    - name: Reset SSH connection to allow group changes
+      meta: reset_connection
+
     - name: Copy SSH private key
       copy:
         src: ~/.ssh/id_rsa
@@ -226,25 +226,40 @@
         accept_hostkey: yes
         force: yes
 
-    - name: Build and tag docker image
-      shell: docker compose build && docker tag $(docker images -q | head -1) {{ docker_user }}/oopsify:latest
+    - name: Build docker image and push to DockerHub
+      shell: "{{ item }}"
       args:
         chdir: /opt/app
-
-    - name: Login to Docker Hub
-      shell: docker login -u {{ docker_user }} -p {{ docker_token }}
-      args:
-        chdir: /opt/app
-
-    - name: Push image to Docker Hub
-      shell: docker push {{ docker_user }}/oopsify:latest
-      args:
-        chdir: /opt/app
+      loop:
+        - docker login -u {{ docker_user }} -p {{ docker_token }}
+        - docker build . --tag {{ docker_user }}/oopsify:latest
+        - docker push {{ docker_user }}/oopsify:latest
 
     - name: Start docker app
       shell: docker compose up -d
       args:
         chdir: /opt/app
+
+    - name: Wait for application to be ready
+      wait_for:
+        port: 80
+        host: "{{ ansible_default_ipv4.address | default('localhost') }}"
+        delay: 10
+        timeout: 60
+
+    - name: Check container status
+      shell: docker ps -a --filter "name=oopsify"
+      register: container_status
+
+    - debug:
+        var: container_status.stdout
+
+    - name: Check container logs
+      shell: docker logs oopsify --tail 20
+      register: container_logs
+
+    - debug:
+        var: container_logs.stdout
 
     - name: Get public IP from server
       shell: curl ident.me
