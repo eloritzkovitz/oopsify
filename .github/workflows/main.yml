@@ -2,8 +2,7 @@ name: upload my image to DockerHub
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
@@ -36,8 +35,5 @@ jobs:
           port: ${{ secrets.PORT }}
           script_stop: true
           script: |
-            sudo docker stop oopsify || true
-            sudo docker rm oopsify || true
-            sudo docker rmi ${{ secrets.DOCKER_USER }}/oopsify || true
-            sudo docker pull ${{ secrets.DOCKER_USER }}/oopsify
-            sudo docker run --name oopsify -d -p 80:4173 ${{ secrets.DOCKER_USER }}/oopsify
+                cd /opt/app
+                sudo docker compose pull && sudo docker compose up -d --force-recreate
