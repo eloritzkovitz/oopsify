@@ -27,7 +27,7 @@ def driver():
         options=chrome_options
     )
 
-    driver.get("http://localhost:5173")
+    driver.get("http://localhost:4173")
     driver.maximize_window()
     time.sleep(2)
 
